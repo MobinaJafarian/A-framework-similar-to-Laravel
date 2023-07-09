@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c >
+RewriteEngine On
+RewriteCond %{THE_REQUEST} !/public/* [NC]
+RewriteCond %{THE_REQUEST} /(app|bootstrap|config|databases|resources|storage|vendors)/.+ [NC]
+RewriteRule ^ - [R=403,L]
+
+RewriteRule ^$ public/  [L]
+RewriteRule (.+) public/$1  [L]
+</IfModule>
