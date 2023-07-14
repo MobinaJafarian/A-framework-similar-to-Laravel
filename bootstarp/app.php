@@ -1,6 +1,13 @@
-<?php 
+<?php
+session_start();
 
-require_once "../config/app.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 
-require_once "../routes/web.php";
-require_once "../routes/api.php";
+// Loads ENVIRONMENT Variables
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->safeLoad();
+
+require_once __DIR__ . "/../config/app.php";
+
+require_once __DIR__ . "/../routes/web.php";
+require_once __DIR__ . "/../routes/api.php";
