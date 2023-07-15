@@ -11,3 +11,8 @@ Route::get('/store_user', [UserController::class, 'store']);
 Route::get('/edit_user/{id}', [UserController::class, 'edit']);
 Route::get('/update_user/{id}', [UserController::class, 'update']);
 Route::get('/destroy_user/{id}', [UserController::class, 'delete']);
+
+echo CURRENT_ROUTE;
+echo '<br>';
+global $routes;
+print_r($routes);
