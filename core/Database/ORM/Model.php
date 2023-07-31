@@ -3,10 +3,11 @@
 namespace Core\Database\ORM;
 
 use Core\Database\Traits\HasQueryBuilder;
+use Core\Database\Traits\HasAttributes;
 
 abstract class Model
 {
-    use HasQueryBuilder;
+    use HasQueryBuilder, HasAttributes;
 
     protected $table;
 
