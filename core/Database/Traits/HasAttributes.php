@@ -4,16 +4,14 @@ namespace Core\Database\Traits;
 
 trait HasAttributes
 {
-    protected function setAttributes(array $array, $object=null)
+    protected function setAttributes(array $array, $object = null)
     {
-        if(!$object)
-        {
+        if (!$object) {
             $class = get_called_class();
-            $object= new $class;
+            $object = new $class;
         }
 
-        foreach($array as $attribute => $value)
-        {
+        foreach ($array as $attribute => $value) {
             $object->$attribute = $value;
         }
 
