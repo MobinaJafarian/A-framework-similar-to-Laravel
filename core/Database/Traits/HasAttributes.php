@@ -4,7 +4,7 @@ namespace Core\Database\Traits;
 
 trait HasAttributes
 {
-    protected function setAttribute(array $array, $object=null)
+    protected function setAttributes(array $array, $object=null)
     {
         if(!$object)
         {
@@ -18,5 +18,16 @@ trait HasAttributes
         }
 
         return $object;
+    }
+
+    protected function setObject(array $array)
+    {
+        $collection = [];
+        foreach ($array as $key => $value) {
+            $object = $this->setAttributes($array, $value);
+            array_push($collection, $object);
+        }
+
+        $this->collection = $collection;
     }
 }
