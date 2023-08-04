@@ -32,4 +32,18 @@ trait HasCRUD
         $this->resetQuery();
         return $this;
     }
+
+    public function find($id){
+        $this->setSql("SELECT * FROM ".$this->table);
+        $this->setWhere("AND" , $this->primaryKey . " = ? ");
+        $this->setValue($this->primaryKey, $id);
+        $statement = $this->executeQuery();
+        $data = $statement->fetch();
+        if($data){
+            return $this->setAttributes($data);
+        }else{
+            return null;
+        }
+    }
+    
 }
