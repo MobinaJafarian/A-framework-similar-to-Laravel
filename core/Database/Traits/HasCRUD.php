@@ -56,4 +56,56 @@ trait HasCRUD
         }
     }
 
+    public function get()
+    {
+        $this->setSql(" SELECT * FROM " . $this->table);
+        $statement = $this->executeQuery();
+        $data = $statement->fetchAll();
+        if ($data) {
+            $this->setObject($data);
+            return $this->collection;
+        } else {
+            return [];
+        }
+    }
+
+    public function delete($id)
+    {
+        $object = $this;
+        $this->resetQuery();
+        if ($id) {
+            $object = $this->find($id);
+            $this->resetQuery();
+        }
+        $object->setSql("DELETE FROM " . $object->table);
+        $object->setWhere("AND", $object->primaryKey . " = ? ");
+        $object->setValue($this->primaryKey, $id);
+        return $object->executeQuery();
+    }
+
+    public function where($attribute, $operation, $value)
+    {
+
+        $condition = $attribute . ' ' . $operation . ' ?';
+        $this->setValue($attribute, $value);
+
+        $operator = " AND ";
+
+        $this->setWhere($operator, $condition);
+        return $this;
+
+    }
+
+    public function orderBy($attribute, $expression)
+    {
+        $this->setOrderBy($attribute, $expression);
+        return $this;
+    }
+
+    public function limit($offset, $number)
+    {
+        $this->setLimit($offset, $number);
+        return $this;
+    }
+
 }
